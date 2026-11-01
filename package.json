@@ -1,0 +1,54 @@
+{
+  "name": "dsh-hot-list",
+  "version": "1.3.2",
+  "description": "DS NewsTop：DSH Desktop 侧边栏每日热榜插件，支持多平台卡片、平台配置和三种颜色模式",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml"
+  },
+  "files": [
+    "README.md",
+    "cordis.patch.yml",
+    "lib",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "engines": {
+    "dsh": "0.2.1-rc.2 || 0.2.1-rc.3"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "meta": {
+      "title": "DS NewsTop",
+      "description": "19 个可选平台，新增小众软件发现频道前 10 条，支持白天、黑夜和自动配色"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awsezxcv/DS-NewsTop.git"
+  },
+  "homepage": "https://github.com/awsezxcv/DS-NewsTop#readme",
+  "bugs": {
+    "url": "https://github.com/awsezxcv/DS-NewsTop/issues"
+  },
+  "scripts": {
+    "test": "node --test"
+  }
+}

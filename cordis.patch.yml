@@ -1,0 +1,4 @@
+# dsh-hot-list · 宿主插件行（bundle patch，由 dsh.profile.bundles 自动应用）
+- insert:
+    - id: dsh-hot-list
+      name: 'dsh-hot-list'
