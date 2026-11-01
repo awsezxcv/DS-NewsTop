@@ -49,6 +49,19 @@
     "url": "https://github.com/awsezxcv/DS-NewsTop/issues"
   },
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-desktop",
+    "news",
+    "newsnow",
+    "hot-list",
+    "ds-newstop"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

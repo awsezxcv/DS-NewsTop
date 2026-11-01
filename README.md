@@ -1,6 +1,6 @@
 # DS NewsTop
 
-![DS NewsTop 封面：多平台卡片与白天、黑夜配色](assets/cover.png)
+![DS NewsTop 封面：多平台卡片与白天、黑夜配色](https://raw.githubusercontent.com/awsezxcv/DS-NewsTop/main/assets/cover.png)
 
 <sub>封面为界面示意图。</sub>
 
@@ -46,15 +46,15 @@ DS NewsTop 是一款为 DSH Desktop 打造的每日热榜插件，以多平台�
 
 已在 **DSH Desktop 2.0.18** 上验证。插件声明兼容的 DSH 核心版本为 `0.2.1-rc.2` / `0.2.1-rc.3`；其他版本尚未验证。
 
-1. 从本仓库的 [Releases](https://github.com/awsezxcv/DS-NewsTop/releases) 下载 `dsh-hot-list-1.3.2.tgz`。
-2. 在 DSH Desktop 菜单中选择“打开 DSH 终端”，进入当前使用的 Profile。默认桌面 Profile 路径如下：
+1. 在 DSH Desktop 菜单中选择“打开 DSH 终端”，进入当前使用的 Profile。
+2. 从 npm 安装插件，默认桌面 Profile 路径如下：
 
    ```sh
    cd ~/.dsh/profiles/desktop
-   pnpm add /完整路径/dsh-hot-list-1.3.2.tgz
+   pnpm add dsh-hot-list@1.3.2
    ```
 
-   请把 `/完整路径/` 替换为实际下载位置。
+   也可从 [Releases](https://github.com/awsezxcv/DS-NewsTop/releases) 下载 `.tgz`，将安装命令中的包名替换为文件的完整路径。
 3. 编辑该目录中的 `package.json`，在 `dsh.profile.bundles` 数组中加入 `"dsh-hot-list"`，保留原有项目。例如：
 
    ```json
