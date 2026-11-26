@@ -10,19 +10,21 @@ DS NewsTop 是一款为 DSH Desktop 打造的每日热榜插件，以多平台�
 
 ## 功能
 
-- **19 个可选来源**：按需勾选平台，调整后即时生效，默认展示其中 14 个。
+- **20 个可选来源**：按需勾选平台，调整后即时生效，默认展示其中 15 个。
 - **卡片式布局**：适应窗口宽度，各平台独立滚动，展示排名、更新时间和来源提供的热度信息。
 - **小众软件最新发现**：读取发现频道的 Markdown 页面，过滤“内容提交规则”，保留页面顺序中的前 10 条分享。
 - **灵活刷新**：支持单卡刷新、刷新全部，以及加载失败后重试；刷新失败时保留上一次内容。
 - **三种配色**：白天、黑夜、自动；自动模式跟随 DSH 当前主题，使用宿主的背景、文字和边框配色。
 - **本地记忆**：平台与配色偏好保存在当前 DSH 的本地浏览器存储中，重新打开后保留。
-- **原文跳转**：点击标题，在外部浏览器打开对应来源页面。
+- **平台排序**：在配置中拖动平台右侧手柄，主榜卡片平滑换位并自动保存顺序。
+- **原站跳转**：点击卡片顶部的平台名称打开原站，点击条目标题打开原帖。
 
 ## 支持来源
 
 | 来源 | 内容 |
 | --- | --- |
 | 小众软件 | 最新发现，过滤规则帖后的前 10 条分享 |
+| 2Libra | 今日热议，按原站顺序展示前 10 条 |
 | 知乎 | 热榜 |
 | V2EX | 最新分享 |
 | 酷安 | 今日最热 |
@@ -47,14 +49,14 @@ DS NewsTop 是一款为 DSH Desktop 打造的每日热榜插件，以多平台�
 已在 **DSH Desktop 2.0.18** 上验证。插件声明兼容的 DSH 核心版本为 `0.2.1-rc.2` / `0.2.1-rc.3`；其他版本尚未验证。
 
 1. 在 DSH Desktop 菜单中选择“打开 DSH 终端”，进入当前使用的 Profile。
-2. 从 npm 安装插件，默认桌面 Profile 路径如下：
+2. 从 [GitHub Release v1.3.7](https://github.com/awsezxcv/DS-NewsTop/releases/tag/v1.3.7) 下载 `dsh-hot-list-1.3.7.tgz`，在当前 Profile 安装。以下以默认桌面 Profile 为例。
 
    ```sh
    cd ~/.dsh/profiles/desktop
-   pnpm add dsh-hot-list@1.3.2
+   pnpm add "/文件所在目录/dsh-hot-list-1.3.7.tgz"
    ```
 
-   也可从 [Releases](https://github.com/awsezxcv/DS-NewsTop/releases) 下载 `.tgz`，将安装命令中的包名替换为文件的完整路径。
+   将命令中的路径替换为下载文件的完整路径。npm 上的旧版可用 `pnpm add dsh-hot-list@1.3.2` 安装。
 3. 编辑该目录中的 `package.json`，在 `dsh.profile.bundles` 数组中加入 `"dsh-hot-list"`，保留原有项目。例如：
 
    ```json
@@ -96,7 +98,7 @@ npm pack
 - 打开面板时加载已启用来源；新添加平台时加载该来源。
 - **当前没有定时自动刷新**，可点击卡片刷新按钮或“刷新全部”获取更新。
 - 宿主对普通请求缓存 60 秒；手动刷新会跳过插件自身缓存，但上游仍可能返回缓存内容，因此不保证每次刷新都会改变榜单。
-- NewsNow 来源显示上游的更新时间；小众软件卡片显示本次获取列表的时间。
+- NewsNow 来源显示上游的更新时间；小众软件和 2Libra 卡片显示本次获取列表的时间。
 
 ## 实现与数据来源
 
@@ -106,10 +108,11 @@ lib/client.js      侧边栏入口、卡片界面、平台配置与颜色模式
 cordis.patch.yml   DSH bundle 注册
 ```
 
-浏览器通过宿主提供的同源接口 `/dsh-hot-list/items?id=<sourceID>` 读取数据。宿主只请求代码中固定的 NewsNow 服务或小众软件发现页面，不接受自定义上游网址。
+浏览器通过宿主提供的同源接口 `/dsh-hot-list/items?id=<sourceID>` 读取数据。宿主请求代码中固定的 NewsNow、小众软件或 2Libra 地址。
 
 - 聚合榜单：[NewsNow](https://newsnow.busiyi.world/)
 - 小众软件发现：[发现频道](https://meta.appinn.net/c/faxian/10.md)
+- 2Libra：[今日热议](https://2libra.com/post/hot/today)，通过[官方 API](https://r2.2libra.com/openapi/v1/index.md)匿名读取 24 小时榜单。若遇到 Cloudflare 验证，可点击卡片顶部的 2Libra 打开原站。
 
 本插件需要联网访问上述服务；某个上游不可用时，对应卡片会显示重试入口。
 
